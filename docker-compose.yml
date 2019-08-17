@@ -1,23 +1,17 @@
 version: '2'
 services:
-  mysql:
-    image: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 'tuda@123'
-    volumes:
-      - ./initsql:/docker-entrypoint-initdb.d
-  redis:
-    image: redis
   zookeeper:
     image: jplock/zookeeper
+    networks:
+      - ditcloud
   disconf:
     image: bailaohe/disconf
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
-      - redis 
       - zookeeper
+    networks:
+      - ditcloud
   nginx:
     image: nginx
     ports:
@@ -27,3 +21,5 @@ services:
       - ./html:/html
     depends_on:
       - disconf
+    networks:
+      - ditcloud
