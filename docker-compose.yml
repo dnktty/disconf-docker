@@ -2,6 +2,12 @@ version: '2'
 services:
   zookeeper:
     image: jplock/zookeeper
+    extra_hosts:
+      - "portal.xd.dit72:172.16.0.4"
+      - "nacos.xd.dit72:172.16.0.4"
+      - "redis.xd.dit72:172.16.0.4"
+      - "auth.xd.dit72:172.16.0.4"
+      - "mysql.xd.dit72:172.16.0.4"
     networks:
       - ditcloud
   disconf:
@@ -10,6 +16,14 @@ services:
       - "8080:8080"
     depends_on:
       - zookeeper
+    volumes:
+      - ./disconf/conf:/disconf/conf
+    extra_hosts:
+      - "portal.xd.dit72:172.16.0.4"
+      - "nacos.xd.dit72:172.16.0.4"
+      - "redis.xd.dit72:172.16.0.4"
+      - "auth.xd.dit72:172.16.0.4"
+      - "mysql.xd.dit72:172.16.0.4"
     networks:
       - ditcloud
   nginx:
@@ -21,5 +35,11 @@ services:
       - ./html:/html
     depends_on:
       - disconf
+    extra_hosts:
+      - "portal.xd.dit72:172.16.0.4"
+      - "nacos.xd.dit72:172.16.0.4"
+      - "redis.xd.dit72:172.16.0.4"
+      - "auth.xd.dit72:172.16.0.4"
+      - "mysql.xd.dit72:172.16.0.4"
     networks:
       - ditcloud
