@@ -8,8 +8,6 @@ services:
       - "redis.xd.dit72:172.16.0.4"
       - "auth.xd.dit72:172.16.0.4"
       - "mysql.xd.dit72:172.16.0.4"
-    networks:
-      - ditcloud
   disconf:
     image: bailaohe/disconf
     ports:
@@ -24,8 +22,6 @@ services:
       - "redis.xd.dit72:172.16.0.4"
       - "auth.xd.dit72:172.16.0.4"
       - "mysql.xd.dit72:172.16.0.4"
-    networks:
-      - ditcloud
   nginx:
     image: nginx
     ports:
@@ -41,5 +37,3 @@ services:
       - "redis.xd.dit72:172.16.0.4"
       - "auth.xd.dit72:172.16.0.4"
       - "mysql.xd.dit72:172.16.0.4"
-    networks:
-      - ditcloud
